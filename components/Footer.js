@@ -6,7 +6,7 @@ import movieIcon from '../public/—Pngtree—movie icon_5326849.png';
 function Footer() {
   return (
     <div>
-      <footer class="bg-white rounded-lg  dark:bg-[#06202A] m-4">
+      <footer class=" rounded-lg  dark:bg-[#06202A] m-4">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div class="sm:flex sm:items-center sm:justify-between">
             <Link href="/" class="flex items-center mb-4 sm:mb-0">
