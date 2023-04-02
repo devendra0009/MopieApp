@@ -42,12 +42,12 @@ function Card({
         {lang}
       </span>
       <div className="text-center md:px-2 py-4 group">
-        <div className="font-bold md:text-xl mb-2">
+        <div className="font-bold text-sm md:text-xl mb-2">
           {title ? title : aliter_title} {release_date!=null?<span>({release_date})</span>:<span></span>}
         </div>
         <span></span>
         {/* <button className='' onClick={()=>{navigator.clipboard.writeText(movie_id)}}>[Click to Copy Movie Id: {movie_id}]</button> */}
-        <p className="text-gray-200 text-sm md:text-[16px] lg:hidden lg:group-hover:block">
+        <p className="text-gray-200 text-[10px] md:text-[16px] lg:hidden lg:group-hover:block">
           {desc}
         </p>
       </div>

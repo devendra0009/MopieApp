@@ -44,7 +44,7 @@ function Footer() {
             <a href="/" class="hover:underline">
               Mopie™
             </a>
-            . All Rights Reserved.
+            . All Rights Reserved. <a href="https://github.com/devendra0009" target='_blank' className='text-blue-300'>Created By Davendra Bedwal</a> 
           </span>
         </div>
       </footer>
