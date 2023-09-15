@@ -7,6 +7,7 @@ const nextConfig = {
       'localhost',
       'image.tmddb.org',
       'image.tmdb.org',
+      'img.freepik.com'
     ],
   },
 };

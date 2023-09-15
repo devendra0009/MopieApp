@@ -1,12 +1,17 @@
-import React from 'react'
-import Nopage from '../../components/Nopage'
+import React from 'react';
+import Nopage from '../../components/Nopage';
+import CollectionComponent from '../../components/CollectionComponent';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function collections() {
   return (
     <div>
-        <Nopage text="COLLECTIONS"/>
+      <Header />
+      <CollectionComponent />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default collections
+export default collections;

@@ -15,7 +15,7 @@ function trending({ results, page, total_pages }) {
       {/* Header */}
       <Header />
       <h1 className='text-xl uppercase flex justify-center items-center gap-2'><BiTrendingUp className='text-lg'/> Trending Movies <BiTrendingUp className='text-lg'/></h1>
-      <div >
+      <div className='w-[70vw] md:[20vw] mx-auto'>
         {results.map((r) => (
           <TrendingCard
             key={r.id}
