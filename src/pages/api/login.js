@@ -3,13 +3,11 @@ import User from '../../../models/User';
 import bcrypt from 'bcryptjs'
 
 export default async function handler(req, res) {
-  await connectDB().catch((err) => res.json({ error: 'Connection Failed!!' }));
+  await connectDB().catch((err) => res.json({ msg: 'Connection Failed!!' }));
 
   if (req.method === 'POST') {
     const { username, password } = req.body;
-    console.log(username, password);
     try {
-      // Check if a user with the provided username exists
       const user = await User.findOne({ username });
 
       if (!user) {
@@ -27,7 +25,6 @@ export default async function handler(req, res) {
 
       return res.status(200).json({ msg: 'Login successful', userWithoutPassword });
     } catch (error) {
-      console.error(error);
       res.status(500).json({ msg: 'An Internal Server Error Occurred' });
     }
   } else {

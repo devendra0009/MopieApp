@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import TrendingCard from '../../components/TrendingCard';
 import { ImPrevious, ImNext } from 'react-icons/im';
 import { useRouter } from 'next/router';
-import {BiTrendingUp} from 'react-icons/bi'
+import { BiTrendingUp } from 'react-icons/bi';
 const API_KEY = process.env.API_KEY;
 
 function trending({ results, page, total_pages }) {
@@ -14,8 +14,11 @@ function trending({ results, page, total_pages }) {
     <div>
       {/* Header */}
       <Header />
-      <h1 className='text-xl uppercase flex justify-center items-center gap-2'><BiTrendingUp className='text-lg'/> Trending Movies <BiTrendingUp className='text-lg'/></h1>
-      <div className='w-[70vw] md:[20vw] mx-auto'>
+      <div className="w-[70vw] md:[20vw] mx-auto">
+        <h1 className="text-md md:text-xl uppercase flex justify-center items-center gap-2 bg-blue-950 w-[43%] mx-auto py-3 rounded-lg">
+          <BiTrendingUp className="text-lg" /> Trending Movies{' '}
+          <BiTrendingUp className="text-lg" />
+        </h1>
         {results.map((r) => (
           <TrendingCard
             key={r.id}
@@ -34,22 +37,26 @@ function trending({ results, page, total_pages }) {
         ))}
       </div>
       <div className="flex justify-center">
-      {
-        page==1?<ImPrevious className='text-white cursor-pointer text-3xl opacity-30'/>:<ImPrevious
-          className="text-white cursor-pointer text-3xl"
-          color="white"
-          onClick={() => router.push(`?trend&page=${page - 1}`)}
-        />
-      }
-        
+        {page == 1 ? (
+          <ImPrevious className="text-white cursor-pointer text-3xl opacity-30" />
+        ) : (
+          <ImPrevious
+            className="text-white cursor-pointer text-3xl"
+            color="white"
+            onClick={() => router.push(`?trend&page=${page - 1}`)}
+          />
+        )}
+
         <h3 className="mx-8">{page}</h3>
-        {
-          page==total_pages?<ImNext className="text-white text-3xl cursor-pointer opacity-40"/>:<ImNext
-          className="text-white text-3xl cursor-pointer"
-          color="white"
-          onClick={() => router.push(`?trend&page=${page + 1}`)}
-        />
-        }
+        {page == total_pages ? (
+          <ImNext className="text-white text-3xl cursor-pointer opacity-40" />
+        ) : (
+          <ImNext
+            className="text-white text-3xl cursor-pointer"
+            color="white"
+            onClick={() => router.push(`?trend&page=${page + 1}`)}
+          />
+        )}
       </div>
       <Footer />
     </div>
@@ -59,9 +66,11 @@ function trending({ results, page, total_pages }) {
 export default trending;
 
 export async function getServerSideProps(context) {
-  const page=context.query.page;
+  const page = context.query.page;
   const req = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page==null?1:page}`
+    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${
+      page == null ? 1 : page
+    }`
   ).then((res) => res.json());
   // for trending movies, we get a url https://api.themoviedb.org/3/trending/all/week?api_key=3b4b0d6c9602439b1ed6b6c536bc9f14&language=en-US
   return {

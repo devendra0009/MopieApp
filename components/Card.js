@@ -5,6 +5,9 @@ import { MdAddCircle } from 'react-icons/md';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { BsThreeDots } from 'react-icons/bs';
+import showWarnToast from './toastify/warn';
+import showErrorToast from './toastify/error';
+import showSuccessToast from './toastify/success';
 
 function Card({
   movie_id,
@@ -20,13 +23,11 @@ function Card({
   release_date,
 }) {
   const BASE_URL = 'https://image.tmdb.org/t/p/w500/';
-  // let dynamicDesc = desc != undefined && desc.substr(0, 200);
   const [load,setLoad]=useState(false)
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const addToLater = async () => {
-    // console.log('added');
     setLoad(true)
     const movieTitle=title!==undefined? title:aliter_title
     const imgCorrect=img1!==undefined?img1:img2
@@ -34,6 +35,7 @@ function Card({
       img:imgCorrect,
       title: movieTitle
     };
+    const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       try {
         const data = {
@@ -41,18 +43,16 @@ function Card({
           movies,
         };
         const response = await axios.post('/api/addToLater', data);
-        console.log(response);
+        showSuccessToast(response.data.msg)
         setLoad(false)
       } catch (error) {
+        showErrorToast(error.response.data.msg)
         setLoad(false)
-        console.error('Error adding tasks:', error);
-        // throw error;
       }
     } else {
       setLoad(false)
-      alert('Please login first');
+      showWarnToast('Please Login First!')
     }
-    console.log(movies);
   };
 
   return (
@@ -118,7 +118,7 @@ function Card({
             </>
           )}
         </div>
-        <div className=" opacity-0 hover:opacity-100 absolute h-full bg-black hover:bg-opacity-70 bottom-0 text-[80%] overflow-auto text-center md:px-2 py-4 group">
+        <div className=" opacity-0 hover:opacity-100 absolute text-justify h-full bg-black hover:bg-opacity-80 bottom-0 text-[80%] overflow-auto  md:px-2 px-2 py-4 group">
           {!load?<MdAddCircle
             className=" z-100 mx-auto pb-2 transform hover:scale-110 "
             size={40}

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import Image from 'next/image';
+import showSuccessToast from './toastify/success';
 
 const ProfileComponent = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const ProfileComponent = () => {
   const handleLogout = () => {
     setClick(true);
     localStorage.removeItem('user');
+    showSuccessToast('Logged Out Sucessfully!')
     router.push('/account/login');
     setClick(false);
   };

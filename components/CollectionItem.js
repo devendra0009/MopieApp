@@ -4,6 +4,9 @@ import React, { useContext } from 'react';
 import { AiFillMinusCircle } from 'react-icons/ai';
 import { AuthContext } from '../context/AuthContext';
 import { useRouter } from 'next/router';
+import showSuccessToast from './toastify/success';
+import showErrorToast from './toastify/error';
+import showWarnToast from './toastify/warn';
 
 const CollectionItem = ({ data }) => {
   const BASE_URL = 'https://image.tmdb.org/t/p/w500/';
@@ -13,23 +16,18 @@ const CollectionItem = ({ data }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       try {
-        console.log(user, data);
         const sendData = {
           username: user.username,
           movieId: data._id,
         };
-        console.log(sendData);
         const res = await axios.post(`/api/removeFromLater`, sendData);
-        if(res.status==200)
-        {
-          router.push('/');
-        }
-        console.log(res);
+        showSuccessToast(res.data.msg)
+        router.push('/');
       } catch (error) {
-        console.log(error);
+        showErrorToast(error.response.data.msg)
       }
     } else {
-      console.log('Please login!!');
+      showWarnToast('Please Login First!')
     }
   };
   return (

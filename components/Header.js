@@ -13,7 +13,7 @@ import Link from 'next/link';
 function Header() {
   const [isUser, setIsUser] = useState(false);
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
     if(user) setIsUser(true);
   },[]);
   return (
